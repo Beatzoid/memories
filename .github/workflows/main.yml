@@ -30,7 +30,7 @@ jobs:
               run: cd server && yarn install
 
             - name: Build Server
-              run: npm i -g typescript && cd server && yarn build
+              run: npm i -g typescript && cd server && tsc
 
             - name: Build Client
               run: cd client && yarn build
