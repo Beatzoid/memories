@@ -2816,7 +2816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^17.0.10":
+"@types/react-dom@npm:*, @types/react-dom@npm:^17.0.14":
   version: 17.0.14
   resolution: "@types/react-dom@npm:17.0.14"
   dependencies:
@@ -12449,7 +12449,7 @@ __metadata:
     "@testing-library/react": ^12.1.4
     "@testing-library/user-event": ^13.5.0
     "@types/react": ^17.0.33
-    "@types/react-dom": ^17.0.10
+    "@types/react-dom": ^17.0.14
     "@vitejs/plugin-react": ^1.0.7
     axios: ^0.26.1
     moment: ^2.29.1
