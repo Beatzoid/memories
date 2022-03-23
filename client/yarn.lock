@@ -2816,7 +2816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^17.0.10":
+"@types/react-dom@npm:*, @types/react-dom@npm:^17.0.14":
   version: 17.0.14
   resolution: "@types/react-dom@npm:17.0.14"
   dependencies:
@@ -2855,7 +2855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.33":
+"@types/react@npm:*, @types/react@npm:^17.0.41":
   version: 17.0.41
   resolution: "@types/react@npm:17.0.41"
   dependencies:
@@ -3093,7 +3093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^1.0.7":
+"@vitejs/plugin-react@npm:^1.2.0":
   version: 1.2.0
   resolution: "@vitejs/plugin-react@npm:1.2.0"
   dependencies:
@@ -12202,7 +12202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.5.4":
+"typescript@npm:^4.6.2":
   version: 4.6.2
   resolution: "typescript@npm:4.6.2"
   bin:
@@ -12212,7 +12212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.5.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.2#~builtin<compat/typescript>":
   version: 4.6.2
   resolution: "typescript@patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"
   bin:
@@ -12410,7 +12410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.8.0":
+"vite@npm:^2.8.6":
   version: 2.8.6
   resolution: "vite@npm:2.8.6"
   dependencies:
@@ -12448,9 +12448,9 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.2
     "@testing-library/react": ^12.1.4
     "@testing-library/user-event": ^13.5.0
-    "@types/react": ^17.0.33
-    "@types/react-dom": ^17.0.10
-    "@vitejs/plugin-react": ^1.0.7
+    "@types/react": ^17.0.41
+    "@types/react-dom": ^17.0.14
+    "@vitejs/plugin-react": ^1.2.0
     axios: ^0.26.1
     moment: ^2.29.1
     react: ^17.0.2
@@ -12460,8 +12460,8 @@ __metadata:
     react-scripts: 5.0.0
     redux: ^4.1.2
     redux-thunk: ^2.4.1
-    typescript: ^4.5.4
-    vite: ^2.8.0
+    typescript: ^4.6.2
+    vite: ^2.8.6
   languageName: unknown
   linkType: soft
 
