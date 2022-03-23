@@ -3093,7 +3093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^1.0.7":
+"@vitejs/plugin-react@npm:^1.2.0":
   version: 1.2.0
   resolution: "@vitejs/plugin-react@npm:1.2.0"
   dependencies:
@@ -12450,7 +12450,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@types/react": ^17.0.33
     "@types/react-dom": ^17.0.10
-    "@vitejs/plugin-react": ^1.0.7
+    "@vitejs/plugin-react": ^1.2.0
     axios: ^0.26.1
     moment: ^2.29.1
     react: ^17.0.2
