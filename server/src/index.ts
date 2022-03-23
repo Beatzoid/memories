@@ -1,5 +1,7 @@
+import "dotenv-safe/config";
+
 import express from "express";
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
@@ -10,8 +12,8 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
 
-    // mongoose
-    //     .connect("")
-    //     .then(() => console.log("Successfully connected to mongoDB"))
-    //     .catch((err) => console.log(err));
+    mongoose
+        .connect(process.env.MONGODB_URL!)
+        .then(() => console.log("Successfully connected to mongoDB"))
+        .catch((err) => console.log(err));
 });
