@@ -33,4 +33,4 @@ jobs:
               run: npm i -g typescript && cd server && tsc
 
             - name: Build Client
-              run: cd client && yarn build
+              run: cd client && yarn install && yarn build
