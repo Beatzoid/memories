@@ -4,7 +4,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import postRoutes from "./routes/posts";
+
 const app = express();
+
+// Routes
+app.use("/posts", postRoutes);
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:3000" }));
 

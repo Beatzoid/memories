@@ -1,9 +1,59 @@
-const app = () => {
+import { AppBar, Container, Typography, Grow, Grid } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+import Form from "./components/Form/form";
+import Posts from "./components/Posts/posts";
+
+import useStyles from "./styles";
+
+import memories from "./images/memories.png";
+
+const App = () => {
+    const styles = useStyles();
+    const theme = createTheme();
+
     return (
-        <div>
-            <h1>Memories</h1>
-        </div>
+        <ThemeProvider theme={theme}>
+            <Container maxWidth="lg">
+                <AppBar
+                    className={styles.appBar}
+                    position="static"
+                    color="inherit"
+                >
+                    <Typography
+                        className={styles.heading}
+                        variant="h2"
+                        align="center"
+                    >
+                        Memories
+                    </Typography>
+                    <img
+                        className={styles.image}
+                        src={memories}
+                        alt="Memories"
+                        height="40px"
+                    />
+                </AppBar>
+                <Grow in>
+                    <Container>
+                        <Grid
+                            container
+                            justifyContent="space-between"
+                            alignItems="stretch"
+                            spacing={4}
+                        >
+                            <Grid item xs={12} sm={7}>
+                                <Posts />
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <Form />
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grow>
+            </Container>
+        </ThemeProvider>
     );
 };
 
-export default app;
+export default App;
