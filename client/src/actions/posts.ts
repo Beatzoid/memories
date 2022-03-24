@@ -34,3 +34,13 @@ export const updatePost =
             console.error(err);
         }
     };
+
+export const deletePost = (id: string) => async (dispatch: AppDispatch) => {
+    try {
+        await api.deletePost(id);
+
+        dispatch({ type: "DELETE", payload: id });
+    } catch (err) {
+        console.error(err);
+    }
+};

@@ -15,6 +15,9 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
+import { useAppDispatch } from "../../../types/redux";
+import { deletePost } from "../../../actions/posts";
+
 import useStyles from "./styles";
 
 import { Post } from "../../../types/post";
@@ -27,6 +30,8 @@ const PostComponent = ({
     post: Post;
     setCurrentId: Dispatch<SetStateAction<string | null>>;
 }) => {
+    const dispatch = useAppDispatch();
+
     const styles = useStyles();
 
     return (
@@ -77,7 +82,11 @@ const PostComponent = ({
                     {post.likeCount}
                 </Button>
 
-                <Button size="small" color="primary" onClick={() => {}}>
+                <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => dispatch(deletePost(post._id!))}
+                >
                     <DeleteIcon fontSize="small" />
                     Delete
                 </Button>

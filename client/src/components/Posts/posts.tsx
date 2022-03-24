@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { CircularProgress, Grid } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 
 import { Post } from "../../types/post";
 import { useAppSelector } from "../../types/redux";

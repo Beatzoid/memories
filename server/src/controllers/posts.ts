@@ -50,3 +50,20 @@ export const updatePost = async (req: Request, res: Response) => {
         return res.status(500).json({ error: error.message });
     }
 };
+
+export const deletePost = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({ err: "Post not found" });
+
+    try {
+        await PostMessage.findByIdAndRemove(id);
+        console.log("api", id);
+
+        return res.status(200).json({ msg: "Succcessfully deleted" });
+    } catch (error: any) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+};
