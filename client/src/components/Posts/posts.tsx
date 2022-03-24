@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { CircularProgress, Grid } from "@mui/material";
 
 import { Post } from "../../types/post";
@@ -7,7 +9,11 @@ import PostComponent from "./Post/post";
 
 import useStyles from "./styles";
 
-const Posts = () => {
+const Posts = ({
+    setCurrentId
+}: {
+    setCurrentId: Dispatch<SetStateAction<string | null>>;
+}) => {
     const styles = useStyles();
     const posts = useAppSelector((state: { posts: Post[] }) => state.posts);
 
@@ -22,7 +28,7 @@ const Posts = () => {
         >
             {posts.map((post) => (
                 <Grid key={post._id!} item xs={12} sm={6}>
-                    <PostComponent post={post} />
+                    <PostComponent post={post} setCurrentId={setCurrentId} />
                 </Grid>
             ))}
         </Grid>

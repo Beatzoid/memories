@@ -18,8 +18,15 @@ dayjs.extend(relativeTime);
 import useStyles from "./styles";
 
 import { Post } from "../../../types/post";
+import { Dispatch, SetStateAction } from "react";
 
-const PostComponent = ({ post }: { post: Post }) => {
+const PostComponent = ({
+    post,
+    setCurrentId
+}: {
+    post: Post;
+    setCurrentId: Dispatch<SetStateAction<string | null>>;
+}) => {
     const styles = useStyles();
 
     return (
@@ -41,7 +48,7 @@ const PostComponent = ({ post }: { post: Post }) => {
                 <Button
                     style={{ color: "white" }}
                     size="small"
-                    onClick={() => {}}
+                    onClick={() => setCurrentId(post._id!)}
                 >
                     <MoreHorizIcon />
                 </Button>
@@ -53,8 +60,12 @@ const PostComponent = ({ post }: { post: Post }) => {
                 </Typography>
             </div>
 
+            <Typography className={styles.title} variant="h5" gutterBottom>
+                {post.title}
+            </Typography>
+
             <CardContent>
-                <Typography className={styles.title} variant="h5" gutterBottom>
+                <Typography variant="body2" gutterBottom>
                     {post.message}
                 </Typography>
             </CardContent>

@@ -1,14 +1,33 @@
-import { FormEvent, useState, SyntheticEvent } from "react";
+import {
+    FormEvent,
+    useState,
+    Dispatch,
+    SetStateAction,
+    useEffect
+} from "react";
 
-import { useAppDispatch } from "../../types/redux";
-import { createPost } from "../../actions/posts";
+import { useAppDispatch, useAppSelector } from "../../types/redux";
+import { Post } from "../../types/post";
+
+import { createPost, updatePost } from "../../actions/posts";
 
 import { Paper, TextField, Typography, Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 import useStyles from "./styles";
+const Form = ({
+    currentId,
+    setCurrentId
+}: {
+    currentId: string;
+    setCurrentId: Dispatch<SetStateAction<string | null>>;
+}) => {
+    const styles = useStyles();
 
-const Form = () => {
     const dispatch = useAppDispatch();
+    const post = useAppSelector((state: { posts: Post[] }) =>
+        currentId ? state.posts.find((p) => p._id === currentId) : null
+    );
 
     const [postData, setPostData] = useState({
         creator: "",
@@ -17,18 +36,32 @@ const Form = () => {
         tags: "",
         selectedFile: ""
     });
+    const [loading, setLoading] = useState(false);
 
-    const styles = useStyles();
+    useEffect(() => {
+        if (post) setPostData(post);
+    }, [post]);
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        dispatch(createPost(postData));
+        if (currentId) {
+            setLoading(true);
+            await dispatch(updatePost(currentId!, postData));
+            setLoading(false);
+        } else {
+            setLoading(true);
+            await dispatch(createPost(postData));
+            setLoading(false);
+        }
+
+        clear();
     };
 
     const handleFile = (e: any) => {
         const img = new Image();
 
+        // Convert image to Base64
         const reader = new FileReader();
         reader.addEventListener("load", (event) => {
             img.src = event.target!.result! as string;
@@ -39,6 +72,17 @@ const Form = () => {
         reader.readAsDataURL(e.target.files[0]);
     };
 
+    const clear = () => {
+        setPostData({
+            creator: "",
+            title: "",
+            message: "",
+            tags: "",
+            selectedFile: ""
+        });
+        setCurrentId(null);
+    };
+
     return (
         <Paper className={styles.paper}>
             <form
@@ -47,7 +91,9 @@ const Form = () => {
                 className={`${styles.root} ${styles.form}`}
                 onSubmit={handleSubmit}
             >
-                <Typography variant="h6">Create a Memory</Typography>
+                <Typography variant="h6">
+                    {currentId ? "Editing" : "Create"} a Memory
+                </Typography>
 
                 <TextField
                     name="creator"
@@ -97,32 +143,39 @@ const Form = () => {
                     <input type="file" multiple={false} onChange={handleFile} />
                 </div>
 
-                <Button
-                    style={{ marginBottom: "15px" }}
-                    className={styles.buttonSubmit}
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    type="submit"
-                    fullWidth
-                >
-                    Submit
-                </Button>
+                {loading ? (
+                    <LoadingButton
+                        loading
+                        style={{ marginBottom: "15px" }}
+                        className={styles.buttonSubmit}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        type="submit"
+                        fullWidth
+                    >
+                        Submit
+                    </LoadingButton>
+                ) : (
+                    <Button
+                        style={{ marginBottom: "15px" }}
+                        className={styles.buttonSubmit}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        type="submit"
+                        fullWidth
+                    >
+                        Submit
+                    </Button>
+                )}
 
                 <Button
                     variant="contained"
                     color="secondary"
                     size="small"
                     fullWidth
-                    onClick={() =>
-                        setPostData({
-                            creator: "",
-                            title: "",
-                            message: "",
-                            tags: "",
-                            selectedFile: ""
-                        })
-                    }
+                    onClick={clear}
                 >
                     Clear
                 </Button>

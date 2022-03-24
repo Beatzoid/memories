@@ -10,9 +10,11 @@ import Posts from "./components/Posts/posts";
 import useStyles from "./styles";
 
 import memories from "./images/memories.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
+    const [currentId, setCurrentId] = useState<string | null>(null);
+
     const dispatch = useAppDispatch();
 
     const styles = useStyles();
@@ -20,7 +22,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentId, dispatch]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -53,10 +55,13 @@ const App = () => {
                             spacing={4}
                         >
                             <Grid item xs={12} sm={7}>
-                                <Posts />
+                                <Posts setCurrentId={setCurrentId} />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <Form />
+                                <Form
+                                    currentId={currentId!}
+                                    setCurrentId={setCurrentId}
+                                />
                             </Grid>
                         </Grid>
                     </Container>
