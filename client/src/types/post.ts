@@ -1,10 +1,10 @@
 export interface Post {
+    _id?: string;
+    creator: string;
     title: string;
     message: string;
-    creator: string;
-    tags: string[];
+    tags: string;
     selectedFile: string;
-    likeCount: number;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    likeCount?: number;
 }

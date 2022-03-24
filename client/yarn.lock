@@ -5120,6 +5120,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "dayjs@npm:1.11.0"
+  checksum: 2d36f6d71345114cdcd89147adf9e05b4f8fe81684e08c8bf1f86b140aa0b86ecc3cae661a9348d96feb7fbefd03e1bc3697303688e95209670abcb36b4ece15
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9, debug@npm:^2.6.0, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -9059,13 +9066,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment@npm:^2.29.1":
-  version: 2.29.1
-  resolution: "moment@npm:2.29.1"
-  checksum: 1e14d5f422a2687996be11dd2d50c8de3bd577c4a4ca79ba5d02c397242a933e5b941655de6c8cb90ac18f01cc4127e55b4a12ae3c527a6c0a274e455979345e
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -12735,7 +12735,7 @@ __metadata:
     "@types/react-dom": ^17.0.14
     "@vitejs/plugin-react": ^1.2.0
     axios: ^0.26.1
-    moment: ^2.29.1
+    dayjs: ^1.11.0
     react: ^17.0.2
     react-dom: ^17.0.2
     react-file-base64: ^1.0.3

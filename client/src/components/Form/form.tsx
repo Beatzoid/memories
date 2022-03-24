@@ -1,10 +1,15 @@
-import { FormEvent, useState } from "react";
-import FileBase from "react-file-base64";
+import { FormEvent, useState, SyntheticEvent } from "react";
+
+import { useAppDispatch } from "../../types/redux";
+import { createPost } from "../../actions/posts";
 
 import { Paper, TextField, Typography, Button } from "@mui/material";
+
 import useStyles from "./styles";
 
 const Form = () => {
+    const dispatch = useAppDispatch();
+
     const [postData, setPostData] = useState({
         creator: "",
         title: "",
@@ -15,7 +20,24 @@ const Form = () => {
 
     const styles = useStyles();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {};
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        dispatch(createPost(postData));
+    };
+
+    const handleFile = (e: any) => {
+        const img = new Image();
+
+        const reader = new FileReader();
+        reader.addEventListener("load", (event) => {
+            img.src = event.target!.result! as string;
+
+            setPostData({ ...postData, selectedFile: img.src });
+        });
+
+        reader.readAsDataURL(e.target.files[0]);
+    };
 
     return (
         <Paper className={styles.paper}>
@@ -72,13 +94,7 @@ const Form = () => {
                 />
 
                 <div className={styles.fileInput}>
-                    <FileBase
-                        type="file"
-                        multiple={false}
-                        onDone={({ base }: { base: string }) =>
-                            setPostData({ ...postData, selectedFile: base })
-                        }
-                    />
+                    <input type="file" multiple={false} onChange={handleFile} />
                 </div>
 
                 <Button
