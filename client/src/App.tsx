@@ -1,16 +1,26 @@
 import { AppBar, Container, Typography, Grow, Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+import { getPosts } from "./actions/posts";
+import { useAppDispatch } from "./types/redux";
+
 import Form from "./components/Form/form";
 import Posts from "./components/Posts/posts";
 
 import useStyles from "./styles";
 
 import memories from "./images/memories.png";
+import { useEffect } from "react";
 
 const App = () => {
+    const dispatch = useAppDispatch();
+
     const styles = useStyles();
     const theme = createTheme();
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch]);
 
     return (
         <ThemeProvider theme={theme}>
