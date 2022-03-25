@@ -16,7 +16,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 import { useAppDispatch } from "../../../types/redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 
 import useStyles from "./styles";
 
@@ -61,7 +61,7 @@ const PostComponent = ({
 
             <div className={styles.details}>
                 <Typography variant="body2" color="textSecondary">
-                    {post.tags.split(",").map((tag) => `#${tag} `)}
+                    {post.tags.map((tag) => `#${tag} `)}
                 </Typography>
             </div>
 
@@ -70,15 +70,19 @@ const PostComponent = ({
             </Typography>
 
             <CardContent>
-                <Typography variant="body2" gutterBottom>
+                <Typography variant="body2" color="textSecondary" component="p">
                     {post.message}
                 </Typography>
             </CardContent>
 
             <CardActions className={styles.cardActions}>
-                <Button size="small" color="primary" onClick={() => {}}>
+                <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => dispatch(likePost(post._id!))}
+                >
                     <ThumbUpAltIcon fontSize="small" />
-                    Like
+                    &nbsp; Like &nbsp;
                     {post.likeCount}
                 </Button>
 

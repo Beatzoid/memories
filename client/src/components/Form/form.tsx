@@ -33,7 +33,7 @@ const Form = ({
         creator: "",
         title: "",
         message: "",
-        tags: "",
+        tags: [""],
         selectedFile: ""
     });
     const [loading, setLoading] = useState(false);
@@ -77,7 +77,7 @@ const Form = ({
             creator: "",
             title: "",
             message: "",
-            tags: "",
+            tags: [""],
             selectedFile: ""
         });
         setCurrentId(null);
@@ -128,14 +128,17 @@ const Form = ({
                     }
                 />
 
-                <TextField
+                <TextField  
                     name="tags"
                     variant="outlined"
                     label="Tags"
                     fullWidth
                     value={postData.tags}
                     onChange={(e) =>
-                        setPostData({ ...postData, tags: e.target.value })
+                        setPostData({
+                            ...postData,
+                            tags: e.target.value.split(",")
+                        })
                     }
                 />
 

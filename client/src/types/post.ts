@@ -3,7 +3,7 @@ export interface Post {
     creator: string;
     title: string;
     message: string;
-    tags: string;
+    tags: string[];
     selectedFile: string;
     createdAt?: string;
     likeCount?: number;

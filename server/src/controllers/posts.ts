@@ -59,9 +59,30 @@ export const deletePost = async (req: Request, res: Response) => {
 
     try {
         await PostMessage.findByIdAndRemove(id);
-        console.log("api", id);
 
         return res.status(200).json({ msg: "Succcessfully deleted" });
+    } catch (error: any) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+export const likePost = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({ err: "Post not found" });
+
+    try {
+        const post = await PostMessage.findById(id);
+
+        if (!post) return res.status(404).json({ err: "Post not found" });
+
+        post.likeCount += 1;
+
+        await post.save();
+
+        return res.status(200).json(post);
     } catch (error: any) {
         console.log(error);
         return res.status(500).json({ error: error.message });

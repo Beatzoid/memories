@@ -8,3 +8,5 @@ export const createPost = (newPost: Post) => axios.post(url, newPost);
 export const updatePost = (id: string, updatedPost: Post) =>
     axios.patch(`${url}/${id}`, updatedPost);
 export const deletePost = (id: string) => axios.delete(`${url}/${id}`);
+
+export const likePost = (id: string) => axios.patch(`${url}/${id}/like`);

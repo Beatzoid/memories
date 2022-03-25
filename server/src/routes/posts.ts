@@ -4,7 +4,8 @@ import {
     getPosts,
     createPost,
     updatePost,
-    deletePost
+    deletePost,
+    likePost
 } from "../controllers/posts";
 
 const router = Router();
@@ -13,5 +14,7 @@ router.get("/", getPosts);
 router.post("/", createPost);
 router.patch("/:id", updatePost);
 router.delete("/:id", deletePost);
+
+router.patch("/:id/like", likePost);
 
 export default router;
