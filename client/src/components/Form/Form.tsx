@@ -14,7 +14,7 @@ import { createPost, updatePost } from "../../actions/posts";
 import { Paper, TextField, Typography, Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import useStyles from "./styles";
+import useStyles from "./form.styles";
 const Form = ({
     currentId,
     setCurrentId

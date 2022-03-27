@@ -1462,7 +1462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.17.8
   resolution: "@babel/runtime@npm:7.17.8"
   dependencies:
@@ -7114,6 +7114,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"history@npm:^5.2.0":
+  version: 5.3.0
+  resolution: "history@npm:5.3.0"
+  dependencies:
+    "@babel/runtime": ^7.7.6
+  checksum: d73c35df49d19ac172f9547d30a21a26793e83f16a78386d99583b5bf1429cc980799fcf1827eb215d31816a6600684fba9686ce78104e23bd89ec239e7c726f
+  languageName: node
+  linkType: hard
+
 "hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
@@ -10732,7 +10741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.10, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.10, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -10909,6 +10918,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-google-login@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "react-google-login@npm:5.2.2"
+  dependencies:
+    "@types/react": "*"
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ^16 || ^17
+    react-dom: ^16 || ^17
+  checksum: 29199c7035c3c1070a82241dc4063628d693f35a1736d292e3db736e52da825e8a53f9287b0b12b08a50d676973ce1349a4d8243cd849ca25fed6a4284378880
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -10948,6 +10970,30 @@ __metadata:
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
   checksum: 112178a05b1e0ffeaf5d9fb4e56b4410a34a73adeb04dbf13abdc50d9ac9df2ada83e81485156cca0b3fa296aa3612751b3d6cd13be4464642a43679b819cbc7
+  languageName: node
+  linkType: hard
+
+"react-router-dom@npm:^6.2.2":
+  version: 6.2.2
+  resolution: "react-router-dom@npm:6.2.2"
+  dependencies:
+    history: ^5.2.0
+    react-router: 6.2.2
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 83c5105af923c4f8af65a6de98283a95f46ffa643fd0c1a5005647c2c3deb946dae52dda32dc00cfcc3659517b08be806ff02ff03173361dba3d824850053e99
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.2.2":
+  version: 6.2.2
+  resolution: "react-router@npm:6.2.2"
+  dependencies:
+    history: ^5.2.0
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 1a2e7006d4d56bfae8ff11dd5ec15e8049578864dfb2764652510eb0ce4af26a8949790a3732c4f7beb14bcb6500469ea18841b8cfc953e09828e4e4113922f0
   languageName: node
   linkType: hard
 
@@ -12853,7 +12899,9 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-file-base64: ^1.0.3
+    react-google-login: ^5.2.2
     react-redux: ^7.2.6
+    react-router-dom: ^6.2.2
     react-scripts: 5.0.0
     redux: ^4.1.2
     redux-devtools-extension: ^2.13.9

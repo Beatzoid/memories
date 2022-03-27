@@ -18,7 +18,7 @@ dayjs.extend(relativeTime);
 import { useAppDispatch } from "../../../types/redux";
 import { deletePost, likePost } from "../../../actions/posts";
 
-import useStyles from "./styles";
+import useStyles from "./post.styles";
 
 import { Post } from "../../../types/post";
 import { Dispatch, SetStateAction } from "react";

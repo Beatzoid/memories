@@ -5,9 +5,9 @@ import { CircularProgress, Grid, Typography } from "@mui/material";
 import { Post } from "../../types/post";
 import { useAppSelector } from "../../types/redux";
 
-import PostComponent from "./Post/post";
+import PostComponent from "./Post/Post";
 
-import useStyles from "./styles";
+import useStyles from "./posts.styles";
 
 const Posts = ({
     setCurrentId
