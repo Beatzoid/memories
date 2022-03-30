@@ -43,7 +43,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.12.3, @babel/core@npm:^7.16.0, @babel/core@npm:^7.16.12, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.12.3, @babel/core@npm:^7.16.0, @babel/core@npm:^7.17.8, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.17.8
   resolution: "@babel/core@npm:7.17.8"
   dependencies:
@@ -1167,7 +1167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-jsx@npm:^7.16.7":
+"@babel/plugin-transform-react-jsx@npm:^7.16.7, @babel/plugin-transform-react-jsx@npm:^7.17.3":
   version: 7.17.3
   resolution: "@babel/plugin-transform-react-jsx@npm:7.17.3"
   dependencies:
@@ -2496,7 +2496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^4.1.2":
+"@rollup/pluginutils@npm:^4.2.0":
   version: 4.2.0
   resolution: "@rollup/pluginutils@npm:4.2.0"
   dependencies:
@@ -3332,19 +3332,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@vitejs/plugin-react@npm:1.2.0"
+"@vitejs/plugin-react@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@vitejs/plugin-react@npm:1.3.0"
   dependencies:
-    "@babel/core": ^7.16.12
-    "@babel/plugin-transform-react-jsx": ^7.16.7
+    "@babel/core": ^7.17.8
+    "@babel/plugin-transform-react-jsx": ^7.17.3
     "@babel/plugin-transform-react-jsx-development": ^7.16.7
     "@babel/plugin-transform-react-jsx-self": ^7.16.7
     "@babel/plugin-transform-react-jsx-source": ^7.16.7
-    "@rollup/pluginutils": ^4.1.2
+    "@rollup/pluginutils": ^4.2.0
     react-refresh: ^0.11.0
     resolve: ^1.22.0
-  checksum: d838018f591ab1db96d5887eaeef8cfb9214842e7ac00cb196b815ffa453be150c218990f254c5f1dc206903b5c43f8c9c6a60208d075ea268307b6488de3a0d
+  checksum: 3af715b223f3115b271135909f372cd17d1d14a0c756d4b09df9d8ce3cc032e7f7fcb1c056becc62998a4c262c91aa7d6058ff496513c3c98852d1e6f9fd3c0e
   languageName: node
   linkType: hard
 
@@ -12889,7 +12889,7 @@ __metadata:
     "@testing-library/user-event": ^14.0.0
     "@types/react": ^17.0.43
     "@types/react-dom": ^17.0.14
-    "@vitejs/plugin-react": ^1.2.0
+    "@vitejs/plugin-react": ^1.3.0
     axios: ^0.26.1
     dayjs: ^1.11.0
     react: ^18.0.0
