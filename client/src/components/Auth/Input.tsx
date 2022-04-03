@@ -5,7 +5,7 @@ interface InputProps {
     half?: boolean;
     name: string;
     label: string;
-    handleChange: () => any;
+    handleChange: any;
     handleShowPassword?: () => any;
     autoFocus?: boolean;
     type?: React.HTMLInputTypeAttribute;

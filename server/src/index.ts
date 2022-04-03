@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts";
+import userRoutes from "./routes/user";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // Routes
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:3000" }));
 

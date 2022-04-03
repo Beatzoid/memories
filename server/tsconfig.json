@@ -4,6 +4,7 @@
         "lib": ["dom", "dom.iterable", "esnext"],
         "module": "esnext",
         "moduleResolution": "node",
+        "typeRoots": ["./src/types"],
 
         "strict": true,
         "noFallthroughCasesInSwitch": true,

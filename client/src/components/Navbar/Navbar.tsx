@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import decode from "jwt-decode";
+
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useStyles from "./navbar.styles";
 
 import memories from "../../images/memories.png";
+import memoriesText from "../../images/memoriesText.png";
 
 import { useAppDispatch } from "../../types/redux";
 import { LOGOUT } from "../../constants/actionTypes";
@@ -24,18 +27,21 @@ const Navbar = () => {
     );
 
     useEffect(() => {
-        // const token = user?.token;
+        const token = user?.token;
 
-        // TODO: JWT
+        if (token) {
+            const decodedToken: any = decode(token);
 
-        // @ts-ignore
-        setUser(JSON.parse(localStorage.getItem("profile")));
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
+
+        setUser(JSON.parse(localStorage.getItem("profile")!));
     }, [location]);
 
     const logout = () => {
         dispatch({ type: LOGOUT });
 
-        navigate("/");
+        navigate("/auth");
 
         setUser(null);
     };
@@ -43,20 +49,19 @@ const Navbar = () => {
     return (
         <AppBar className={styles.appBar} position="static" color="inherit">
             <div className={styles.brandContainer}>
-                <Typography
-                    className={styles.heading}
-                    variant="h2"
-                    align="center"
+                <img
+                    src={memoriesText}
+                    alt="icon"
                     style={{ cursor: "pointer" }}
+                    height="45px"
                     onClick={() => navigate("/")}
-                >
-                    Memories
-                </Typography>
+                />
 
                 <img
                     className={styles.image}
                     src={memories}
                     alt="Memories"
+                    style={{ cursor: "pointer" }}
                     height="40px"
                     onClick={() => navigate("/")}
                 />

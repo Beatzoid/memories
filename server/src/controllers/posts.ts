@@ -17,7 +17,13 @@ export const getPosts = async (_: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
     const post = req.body;
 
-    const newPost = new PostMessage(post);
+    console.log(post);
+
+    const newPost = new PostMessage({
+        ...post,
+        creator: req.userId,
+        likes: []
+    });
 
     try {
         await newPost.save();
@@ -68,21 +74,34 @@ export const deletePost = async (req: Request, res: Response) => {
 };
 
 export const likePost = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { id: postId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id))
+    if (!req.userId) return res.status(401).json({ err: "Unauthorized" });
+
+    if (!mongoose.Types.ObjectId.isValid(postId))
         return res.status(404).json({ err: "Post not found" });
 
     try {
-        const post = await PostMessage.findById(id);
-
+        const post = await PostMessage.findById(postId);
         if (!post) return res.status(404).json({ err: "Post not found" });
 
-        post.likeCount += 1;
+        const liked = post?.likes.includes(req.userId);
 
-        await post.save();
+        if (!liked) {
+            // Like post
+            post.likes.push(req.userId);
+        } else {
+            // Dislike
+            post.likes = post.likes.filter((id) => `${id}` !== req.userId);
+        }
 
-        return res.status(200).json(post);
+        post.markModified("likes");
+
+        const updatedPost = await PostMessage.findByIdAndUpdate(postId, post, {
+            new: true
+        });
+
+        return res.json(updatedPost);
     } catch (error: any) {
         console.log(error);
         return res.status(500).json({ error: error.message });

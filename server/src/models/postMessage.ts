@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 
-const postMessage = new mongoose.Schema(
+import { Post } from "../types/post";
+
+const postMessage = new mongoose.Schema<Post>(
     {
         title: String,
         message: String,
         creator: String,
+        name: String,
         tags: [String],
         selectedFile: String,
-        likeCount: {
-            type: Number,
-            default: 0
+        likes: {
+            type: [String],
+            default: []
         }
     },
     { timestamps: true }

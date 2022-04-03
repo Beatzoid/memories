@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
@@ -32,7 +33,40 @@ const PostComponent = ({
 }) => {
     const dispatch = useAppDispatch();
 
+    const user = JSON.parse(localStorage.getItem("profile")!);
+
     const styles = useStyles();
+
+    const Likes = () => {
+        if (post.likes.length > 0) {
+            return post.likes.find(
+                (like) => like === (user?.result?.googleId || user?.result?._id)
+            ) ? (
+                <>
+                    <ThumbUpAltIcon fontSize="small" />
+                    &nbsp;
+                    {post.likes.length > 2
+                        ? `You and ${post.likes.length - 1} others`
+                        : `${post.likes.length} like${
+                              post.likes.length > 1 ? "s" : ""
+                          }`}
+                </>
+            ) : (
+                <>
+                    <ThumbUpAltOutlined fontSize="small" />
+                    &nbsp;{post.likes.length}{" "}
+                    {post.likes.length === 1 ? "Like" : "Likes"}
+                </>
+            );
+        }
+
+        return (
+            <>
+                <ThumbUpAltOutlined fontSize="small" />
+                &nbsp;Like
+            </>
+        );
+    };
 
     return (
         <Card className={styles.card}>
@@ -43,21 +77,24 @@ const PostComponent = ({
             />
 
             <div className={styles.overlay}>
-                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">
                     {dayjs(post.createdAt!).fromNow()}
                 </Typography>
             </div>
 
-            <div className={styles.overlay2}>
-                <Button
-                    style={{ color: "white" }}
-                    size="small"
-                    onClick={() => setCurrentId(post._id!)}
-                >
-                    <MoreHorizIcon />
-                </Button>
-            </div>
+            {(user?.result?.googleId === post?.creator ||
+                user?.result?._id === post?.creator) && (
+                <div className={styles.overlay2}>
+                    <Button
+                        style={{ color: "white" }}
+                        size="small"
+                        onClick={() => setCurrentId(post._id!)}
+                    >
+                        <MoreHorizIcon />
+                    </Button>
+                </div>
+            )}
 
             <div className={styles.details}>
                 <Typography variant="body2" color="textSecondary">
@@ -80,20 +117,22 @@ const PostComponent = ({
                     size="small"
                     color="primary"
                     onClick={() => dispatch(likePost(post._id!))}
+                    disabled={!user?.result}
                 >
-                    <ThumbUpAltIcon fontSize="small" />
-                    &nbsp; Like &nbsp;
-                    {post.likeCount}
+                    <Likes />
                 </Button>
 
-                <Button
-                    size="small"
-                    color="primary"
-                    onClick={() => dispatch(deletePost(post._id!))}
-                >
-                    <DeleteIcon fontSize="small" />
-                    Delete
-                </Button>
+                {(user?.result?.googleId === post?.creator ||
+                    user?.result?._id === post?.creator) && (
+                    <Button
+                        size="small"
+                        color="primary"
+                        onClick={() => dispatch(deletePost(post._id!))}
+                    >
+                        <DeleteIcon fontSize="small" />
+                        Delete
+                    </Button>
+                )}
             </CardActions>
         </Card>
     );

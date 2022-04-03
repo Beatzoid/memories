@@ -21,6 +21,16 @@ import Icon from "./icon";
 import { useAppDispatch } from "../../types/redux";
 import { AUTH } from "../../constants/actionTypes";
 
+import { signup, signin } from "../../actions/auth";
+
+const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+};
+
 const Auth = () => {
     const dispatch = useAppDispatch();
 
@@ -28,12 +38,22 @@ const Auth = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
+    const [formData, setFormData] = useState(initialState);
 
     const styles = useStyles();
 
-    const handleSubmit = () => {};
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
 
-    const handleChange = () => {};
+        if (isSignup) {
+            dispatch(signup(formData, navigate));
+        } else {
+            dispatch(signin(formData, navigate));
+        }
+    };
+
+    const handleChange = (e: any) =>
+        setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleShowPassword = () =>
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -148,7 +168,7 @@ const Auth = () => {
                         cookiePolicy="single_host_origin"
                     />
 
-                    <Grid container justifyContent="flex-end">
+                    <Grid container justifyContent="center">
                         <Grid item>
                             <Button onClick={switchMode}>
                                 {isSignup

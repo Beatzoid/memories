@@ -24,13 +24,14 @@ const Form = ({
 }) => {
     const styles = useStyles();
 
+    const user = JSON.parse(localStorage.getItem("profile")!);
+
     const dispatch = useAppDispatch();
     const post = useAppSelector((state: { posts: Post[] }) =>
         currentId ? state.posts.find((p) => p._id === currentId) : null
     );
 
     const [postData, setPostData] = useState({
-        creator: "",
         title: "",
         message: "",
         tags: [""],
@@ -47,11 +48,19 @@ const Form = ({
 
         if (currentId) {
             setLoading(true);
-            await dispatch(updatePost(currentId!, postData));
+            await dispatch(
+                updatePost(currentId!, {
+                    ...postData,
+                    name: user?.result.name,
+                    likes: []
+                })
+            );
             setLoading(false);
         } else {
             setLoading(true);
-            await dispatch(createPost(postData));
+            await dispatch(
+                createPost({ ...postData, name: user?.result.name, likes: [] })
+            );
             setLoading(false);
         }
 
@@ -74,7 +83,6 @@ const Form = ({
 
     const clear = () => {
         setPostData({
-            creator: "",
             title: "",
             message: "",
             tags: [""],
@@ -82,6 +90,17 @@ const Form = ({
         });
         setCurrentId(null);
     };
+
+    if (!user?.result?.name) {
+        return (
+            <Paper className={styles.paper}>
+                <Typography variant="h6" align="center">
+                    Please sign in to create your own memories and like other's
+                    memories
+                </Typography>
+            </Paper>
+        );
+    }
 
     return (
         <Paper className={styles.paper}>
@@ -94,17 +113,6 @@ const Form = ({
                 <Typography variant="h6">
                     {currentId ? "Editing" : "Create"} a Memory
                 </Typography>
-
-                <TextField
-                    name="creator"
-                    variant="outlined"
-                    label="Creator"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) =>
-                        setPostData({ ...postData, creator: e.target.value })
-                    }
-                />
 
                 <TextField
                     name="title"
@@ -128,7 +136,7 @@ const Form = ({
                     }
                 />
 
-                <TextField  
+                <TextField
                     name="tags"
                     variant="outlined"
                     label="Tags"
