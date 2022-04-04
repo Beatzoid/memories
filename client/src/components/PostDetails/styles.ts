@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/system";
+import { createTheme } from "@mui/material";
 
 const theme = createTheme();
 
