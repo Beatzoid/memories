@@ -148,7 +148,7 @@ const Auth = () => {
                     </Button>
 
                     <GoogleLogin
-                        clientId=""
+                        clientId={process.env.GOOGLE_CLIENT_ID!}
                         render={(renderProps) => (
                             <Button
                                 className={styles.googleButton}
