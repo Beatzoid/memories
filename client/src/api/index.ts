@@ -2,7 +2,9 @@ import axios from "axios";
 import { FormData } from "../types/auth";
 import { Post } from "../types/post";
 
-const API = axios.create({ baseURL: "http://localhost:4000" });
+const API = axios.create({
+    baseURL: process.env.API_URL || "http://localhost:4000"
+});
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem("profile")) {
