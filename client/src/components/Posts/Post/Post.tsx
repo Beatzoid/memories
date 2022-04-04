@@ -1,10 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
+
+import { Link } from "react-router-dom";
+
 import {
     Card,
     CardActions,
     CardContent,
     CardMedia,
     Button,
-    Typography
+    Typography,
+    ButtonBase
 } from "@mui/material";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -22,7 +27,6 @@ import { deletePost, likePost } from "../../../actions/posts";
 import useStyles from "./post.styles";
 
 import { Post } from "../../../types/post";
-import { Dispatch, SetStateAction } from "react";
 
 const PostComponent = ({
     post,
@@ -69,48 +73,57 @@ const PostComponent = ({
     };
 
     return (
-        <Card className={styles.card}>
-            <CardMedia
-                className={styles.media}
-                image={post.selectedFile}
-                title={post.title}
-            />
+        <Card className={styles.card} raised elevation={6}>
+            <Link
+                to={`/posts/${post._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+            >
+                <CardMedia
+                    className={styles.media}
+                    image={post.selectedFile}
+                    title={post.title}
+                />
 
-            <div className={styles.overlay}>
-                <Typography variant="h6">{post.name}</Typography>
-                <Typography variant="body2">
-                    {dayjs(post.createdAt!).fromNow()}
-                </Typography>
-            </div>
-
-            {(user?.result?.googleId === post?.creator ||
-                user?.result?._id === post?.creator) && (
-                <div className={styles.overlay2}>
-                    <Button
-                        style={{ color: "white" }}
-                        size="small"
-                        onClick={() => setCurrentId(post._id!)}
-                    >
-                        <MoreHorizIcon />
-                    </Button>
+                <div className={styles.overlay}>
+                    <Typography variant="h6">{post.name}</Typography>
+                    <Typography variant="body2">
+                        {dayjs(post.createdAt!).fromNow()}
+                    </Typography>
                 </div>
-            )}
 
-            <div className={styles.details}>
-                <Typography variant="body2" color="textSecondary">
-                    {post.tags.map((tag) => `#${tag} `)}
+                {(user?.result?.googleId === post?.creator ||
+                    user?.result?._id === post?.creator) && (
+                    <div className={styles.overlay2}>
+                        <Button
+                            style={{ color: "white" }}
+                            size="small"
+                            onClick={() => setCurrentId(post._id!)}
+                        >
+                            <MoreHorizIcon />
+                        </Button>
+                    </div>
+                )}
+
+                <div className={styles.details}>
+                    <Typography variant="body2" color="textSecondary">
+                        {post.tags.map((tag) => `#${tag} `)}
+                    </Typography>
+                </div>
+
+                <Typography className={styles.title} variant="h5" gutterBottom>
+                    {post.title}
                 </Typography>
-            </div>
 
-            <Typography className={styles.title} variant="h5" gutterBottom>
-                {post.title}
-            </Typography>
-
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {post.message}
-                </Typography>
-            </CardContent>
+                <CardContent>
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                    >
+                        {post.message}
+                    </Typography>
+                </CardContent>
+            </Link>
 
             <CardActions className={styles.cardActions}>
                 <Button

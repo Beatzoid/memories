@@ -3,11 +3,41 @@ import mongoose from "mongoose";
 
 import PostMessage from "../models/postMessage";
 
-export const getPosts = async (_: Request, res: Response) => {
-    try {
-        const postMessages = await PostMessage.find();
+export const getPosts = async (req: Request, res: Response) => {
+    const { page }: { page: number } = req.query as any;
+    // Number of posts per page
+    const LIMIT = 8;
+    // Get the starting index of every page
+    const startIndex = (Number(page) - 1) * LIMIT;
 
-        return res.json(postMessages);
+    try {
+        const total = await PostMessage.countDocuments({});
+
+        const posts = await PostMessage.find()
+            .sort({ _id: -1 })
+            .limit(LIMIT)
+            .skip(startIndex);
+
+        return res.json({
+            data: posts,
+            currentPage: Number(page),
+            numberOfPages: Math.ceil(total / LIMIT)
+        });
+    } catch (error: any) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+export const getPost = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+        const post = await PostMessage.findById(id);
+
+        if (!post) return res.status(404).json({ error: "Post not found" });
+
+        return res.json(post);
     } catch (error: any) {
         console.log(error);
         return res.status(500).json({ error: error.message });
@@ -16,8 +46,6 @@ export const getPosts = async (_: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
     const post = req.body;
-
-    console.log(post);
 
     const newPost = new PostMessage({
         ...post,
@@ -102,6 +130,24 @@ export const likePost = async (req: Request, res: Response) => {
         });
 
         return res.json(updatedPost);
+    } catch (error: any) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+export const getPostsBySearch = async (req: Request, res: Response) => {
+    const { searchQuery, tags }: { searchQuery: string; tags: string } =
+        req.query as any;
+
+    try {
+        const title = new RegExp(searchQuery, "i");
+
+        const posts = await PostMessage.find({
+            $or: [{ title }, { tags: { $in: tags.split(",") } }]
+        });
+
+        return res.json({ data: posts });
     } catch (error: any) {
         console.log(error);
         return res.status(500).json({ error: error.message });

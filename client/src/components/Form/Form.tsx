@@ -11,10 +11,25 @@ import { Post } from "../../types/post";
 
 import { createPost, updatePost } from "../../actions/posts";
 
-import { Paper, TextField, Typography, Button } from "@mui/material";
+import {
+    Paper,
+    TextField,
+    Typography,
+    Button,
+    Autocomplete,
+    Chip
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import useStyles from "./form.styles";
+
+interface InitialFormValues {
+    title: string;
+    message: string;
+    tags: string[];
+    selectedFile: string;
+}
+
 const Form = ({
     currentId,
     setCurrentId
@@ -27,16 +42,19 @@ const Form = ({
     const user = JSON.parse(localStorage.getItem("profile")!);
 
     const dispatch = useAppDispatch();
-    const post = useAppSelector((state: { posts: Post[] }) =>
-        currentId ? state.posts.find((p) => p._id === currentId) : null
+    const post: Post = useAppSelector((state: any) =>
+        currentId
+            ? state.posts.posts.find((p: Post) => p._id === currentId)
+            : null
     );
 
-    const [postData, setPostData] = useState({
+    const [postData, setPostData] = useState<InitialFormValues>({
         title: "",
         message: "",
-        tags: [""],
+        tags: [],
         selectedFile: ""
     });
+    const [tags, setTags] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -52,14 +70,20 @@ const Form = ({
                 updatePost(currentId!, {
                     ...postData,
                     name: user?.result.name,
-                    likes: []
+                    likes: [],
+                    tags
                 })
             );
             setLoading(false);
         } else {
             setLoading(true);
             await dispatch(
-                createPost({ ...postData, name: user?.result.name, likes: [] })
+                createPost({
+                    ...postData,
+                    name: user?.result.name,
+                    likes: [],
+                    tags
+                })
             );
             setLoading(false);
         }
@@ -85,9 +109,10 @@ const Form = ({
         setPostData({
             title: "",
             message: "",
-            tags: [""],
+            tags: [],
             selectedFile: ""
         });
+        setTags([]);
         setCurrentId(null);
     };
 
@@ -103,7 +128,7 @@ const Form = ({
     }
 
     return (
-        <Paper className={styles.paper}>
+        <Paper className={styles.paper} elevation={6}>
             <form
                 autoComplete="off"
                 noValidate
@@ -136,18 +161,32 @@ const Form = ({
                     }
                 />
 
-                <TextField
-                    name="tags"
-                    variant="outlined"
-                    label="Tags"
+                {/* https://stackoverflow.com/questions/64324406/how-can-material-ui-chip-array-be-used-like-angular-chip-input */}
+                <Autocomplete
+                    style={{ margin: "10px 0" }}
+                    multiple
+                    id="tags-filled"
+                    options={[]}
+                    freeSolo
                     fullWidth
-                    value={postData.tags}
-                    onChange={(e) =>
-                        setPostData({
-                            ...postData,
-                            tags: e.target.value.split(",")
-                        })
+                    renderTags={(value: string[], getTagProps: any) =>
+                        value.map((option: string, index: number) => (
+                            <Chip
+                                variant="outlined"
+                                label={option}
+                                {...getTagProps({ index })}
+                            />
+                        ))
                     }
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Search by Tags"
+                            placeholder="Press enter after every tag"
+                        />
+                    )}
+                    onChange={(_: any, value: any) => setTags(value)}
                 />
 
                 <div className={styles.fileInput}>

@@ -1,4 +1,5 @@
 import "./index.css";
+import React from "react";
 
 import { createRoot } from "react-dom/client";
 
@@ -20,9 +21,11 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>
 );
 
 export type RootState = ReturnType<typeof store.getState>;
