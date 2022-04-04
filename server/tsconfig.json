@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
+        "outDir": "dist",
         "lib": ["dom", "dom.iterable", "esnext"],
         "module": "esnext",
         "moduleResolution": "node",
@@ -19,6 +20,7 @@
         "allowSyntheticDefaultImports": true
     },
     "include": ["src"],
+
     "ts-node": {
         "compilerOptions": {
             "module": "commonjs"
