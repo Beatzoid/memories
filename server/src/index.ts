@@ -26,11 +26,11 @@ const app = express();
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
+app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+
 // Routes
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
-
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
