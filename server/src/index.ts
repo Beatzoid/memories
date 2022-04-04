@@ -16,6 +16,7 @@ app.use(function (_, res, next) {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Authorization, authorization"
     );
+    res.header("Access-Control-Allow-Methods", "get,post,put,delete,patch");
     next();
 });
 
