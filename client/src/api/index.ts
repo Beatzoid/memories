@@ -3,7 +3,7 @@ import { FormData } from "../types/auth";
 import { Post } from "../types/post";
 
 const API = axios.create({
-    baseURL: process.env.API_URL || "http://localhost:4000"
+    baseURL: "https://beat-memories.herokuapp.com/" // CHANGE THIS TO YOUR SERVER URL
 });
 
 API.interceptors.request.use((req) => {
