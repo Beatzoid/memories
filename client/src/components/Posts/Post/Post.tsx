@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -8,8 +8,7 @@ import {
     CardContent,
     CardMedia,
     Button,
-    Typography,
-    ButtonBase
+    Typography
 } from "@mui/material";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -41,25 +40,25 @@ const PostComponent = ({
 
     const styles = useStyles();
 
+    const [likes, setLikes] = useState(post?.likes);
+
+    const userId = user?.result?.googleId || user?.result?._id;
+    const hasLikedPost = likes.find((like) => like === userId);
+
     const Likes = () => {
-        if (post.likes.length > 0) {
-            return post.likes.find(
-                (like) => like === (user?.result?.googleId || user?.result?._id)
-            ) ? (
+        if (likes.length > 0) {
+            return hasLikedPost ? (
                 <>
                     <ThumbUpAltIcon fontSize="small" />
                     &nbsp;
-                    {post.likes.length > 2
-                        ? `You and ${post.likes.length - 1} others`
-                        : `${post.likes.length} like${
-                              post.likes.length > 1 ? "s" : ""
-                          }`}
+                    {likes.length > 2
+                        ? `You and ${likes.length - 1} others`
+                        : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
                 </>
             ) : (
                 <>
                     <ThumbUpAltOutlined fontSize="small" />
-                    &nbsp;{post.likes.length}{" "}
-                    {post.likes.length === 1 ? "Like" : "Likes"}
+                    &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
                 </>
             );
         }
@@ -70,6 +69,16 @@ const PostComponent = ({
                 &nbsp;Like
             </>
         );
+    };
+
+    const handleLike = () => {
+        dispatch(likePost(post._id!));
+
+        if (hasLikedPost) {
+            setLikes(likes.filter((id) => id !== userId));
+        } else {
+            setLikes([...likes, userId]);
+        }
     };
 
     return (
@@ -129,7 +138,7 @@ const PostComponent = ({
                 <Button
                     size="small"
                     color="primary"
-                    onClick={() => dispatch(likePost(post._id!))}
+                    onClick={handleLike}
                     disabled={!user?.result}
                 >
                     <Likes />
