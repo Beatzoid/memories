@@ -454,7 +454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^4.2.2, bson@npm:^4.6.2":
+"bson@npm:^4.6.2":
   version: 4.6.2
   resolution: "bson@npm:4.6.2"
   dependencies:
@@ -1897,18 +1897,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "mongoose@npm:6.3.0"
+"mongoose@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "mongoose@npm:6.3.1"
   dependencies:
-    bson: ^4.2.2
+    bson: ^4.6.2
     kareem: 2.3.5
     mongodb: 4.5.0
     mpath: 0.8.4
     mquery: 4.0.2
     ms: 2.1.3
     sift: 16.0.0
-  checksum: b5e239f76ecca8a31cc28cb7f8ba556d53e51cb7a23ff5e353d144056f128d8e77efba1067d2e984d46b1660c0e41316f5747811fdb7c4523af5c052f8358756
+  checksum: 5a9da91a79b0443c2c787c93cb1f06c1f8ee20a81330116a104730b1e1c5b2b378c89848b50d039c0dbe366a2d67650bcb48c0690aa28176d5c0c8b3f38048ec
   languageName: node
   linkType: hard
 
@@ -2521,7 +2521,7 @@ __metadata:
     dotenv-safe: ^8.2.0
     express: ^4.17.3
     jsonwebtoken: ^8.5.1
-    mongoose: ^6.3.0
+    mongoose: ^6.3.1
     nodemon: ^2.0.15
     ts-node-dev: ^1.1.8
     typescript: ^4.6.3
